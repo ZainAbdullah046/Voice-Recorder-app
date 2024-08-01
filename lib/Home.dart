@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Home extends StatefulWidget {
+class  Home extends StatefulWidget {
   const Home({super.key});
 
   @override
@@ -10,6 +10,6 @@ class Home extends StatefulWidget {
 class _MyWidgetState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Scaffold();
   }
 }
