@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
 
 import 'package:voice_recorder_app/Home.dart';
 
