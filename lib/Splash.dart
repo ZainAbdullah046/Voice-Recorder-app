@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-
 import 'package:voice_recorder_app/Home.dart';
 
 class Splash extends StatefulWidget {
