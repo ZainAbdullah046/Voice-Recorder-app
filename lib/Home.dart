@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -49,18 +50,40 @@ class _MyWidgetState extends State<Home> {
     });
   }
 
-  Future<void> start() async {
+  Future<void> _start() async {
     try {
       if (await _record.hasPermission()) {
-        Directory _dir;
+        Directory? _dir;
 
         if (Platform.isIOS) {
           _dir = await getApplicationDocumentsDirectory();
         } else {
           _dir = Directory('/storage/emulated/0/Download/');
+          if (!await _dir.exists())
+            _dir = (await getExternalStorageDirectory());
         }
+        await _record.start(path: '${_dir?.path}${_controller.text}.m4a');
       }
-    } catch (e) {}
+    } catch (e) {
+      log(e.toString() as num);
+    }
+  }
+
+  Future<void> _stop() async {
+    final path = await _record.stop();
+    _audioPath = path;
+    if (_audioPath?.isNotEmpty ?? false) {
+      log((path ?? "") as num);
+    }
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _controller.dispose();
+    _record.dispose();
+
+    super.dispose();
   }
 
   @override
